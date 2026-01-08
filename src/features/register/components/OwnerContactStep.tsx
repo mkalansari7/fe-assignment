@@ -9,6 +9,9 @@ import { FormControl, Button, Box, Typography } from "@mui/material";
 import type { StepProps } from "../types";
 import { FormInput } from "../../../shared/components/FormInput";
 import { saveRegistration } from "../utils/saveRegistration";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "../../../shared/hooks/useSnackbar";
+import { SNACKBAR_TYPE } from "../../../shared/types/ui";
 
 export default function OwnerContactStep({ data, back }: StepProps) {
   const form = useForm<OwnerContactStepData>({
@@ -21,17 +24,31 @@ export default function OwnerContactStep({ data, back }: StepProps) {
     },
   });
 
+  const navigate = useNavigate();
+  const { showSnackbar } = useSnackbar();
+
   const onSubmit = (values: OwnerContactStepData) => {
     const draft = { ...data, ...values };
-
     const result = registerSchema.safeParse(draft);
 
     if (!result.success) {
-      console.error("Final validation failed", result.error);
+      showSnackbar(
+        "Please fix the highlighted errors and try again.",
+        SNACKBAR_TYPE.ERROR
+      );
       return;
     }
 
-    saveRegistration(result.data);
+    try {
+      saveRegistration(result.data);
+      showSnackbar("Business registered successfully!", SNACKBAR_TYPE.SUCCESS);
+      navigate("/businesses");
+    } catch {
+      showSnackbar(
+        "Something went wrong while saving. Please try again.",
+        "error"
+      );
+    }
   };
 
   return (
