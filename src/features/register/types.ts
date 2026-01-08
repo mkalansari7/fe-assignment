@@ -1,13 +1,6 @@
+import type { BusinessType } from "../../shared/types/business";
+
 export type RegisterStep = 0 | 1 | 2;
-
-export const BUSINESS_TYPES = [
-  "Retail",
-  "Service",
-  "Manufacturing",
-  "Technology",
-] as const;
-
-export type BusinessType = (typeof BUSINESS_TYPES)[number];
 
 export type RegisterFormDraft = {
   businessName: string;

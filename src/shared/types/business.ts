@@ -1,8 +1,11 @@
-export type BusinessType =
-  | "Retail"
-  | "Service"
-  | "Manufacturing"
-  | "Technology";
+export const BUSINESS_TYPES = [
+  "Retail",
+  "Service",
+  "Manufacturing",
+  "Technology",
+] as const;
+
+export type BusinessType = (typeof BUSINESS_TYPES)[number];
 
 export interface Business {
   businessName: string;

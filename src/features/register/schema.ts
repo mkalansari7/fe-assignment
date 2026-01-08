@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { BUSINESS_TYPES } from "./types";
+import { BUSINESS_TYPES } from "../../shared/types/business";
 
 export const registerBaseSchema = z.object({
   businessName: z

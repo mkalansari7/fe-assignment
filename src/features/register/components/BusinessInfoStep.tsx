@@ -2,9 +2,10 @@ import { businessInfoStepSchema, type BusinessInfoStepData } from "../schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControl, Button, Box, Typography } from "@mui/material";
-import { BUSINESS_TYPES, type StepProps } from "../types";
+import { type StepProps } from "../types";
 import { ControlledSelect } from "../../../shared/components/ControlledSelect";
 import { FormInput } from "../../../shared/components/FormInput";
+import { BUSINESS_TYPES } from "../../../shared/types/business";
 
 export default function BusinessInfoStep({ data, setData, next }: StepProps) {
   const form = useForm<BusinessInfoStepData>({
