@@ -5,13 +5,14 @@ import {
 } from "../schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormControl, Button, Box, Typography } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import type { StepProps } from "../types";
 import { FormInput } from "../../../shared/components/FormInput";
 import { saveRegistration } from "../utils/saveRegistration";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "../../../shared/hooks/useSnackbar";
 import { SNACKBAR_TYPE } from "../../../shared/types/ui";
+import { FORM_SX } from "../../../shared/styles/form";
 
 export default function OwnerContactStep({ data, back }: StepProps) {
   const form = useForm<OwnerContactStepData>({
@@ -52,78 +53,47 @@ export default function OwnerContactStep({ data, back }: StepProps) {
   };
 
   return (
-    <Box
-      component="form"
-      onSubmit={form.handleSubmit(onSubmit)}
-      sx={{
-        width: "100%",
-        maxWidth: 400,
-        display: "flex",
-        flexDirection: "column",
-        gap: 3,
-        padding: 3,
-      }}
-    >
-      <Typography variant="h5" component="h2" gutterBottom>
-        Owner Contact Information
-      </Typography>
+    <Box component="form" onSubmit={form.handleSubmit(onSubmit)} sx={FORM_SX}>
+      <FormInput
+        name="ownerName"
+        control={form.control}
+        label="Owner Name"
+        placeholder="Full name"
+      />
 
-      <FormControl fullWidth>
-        <FormInput
-          name="ownerName"
-          control={form.control}
-          label="Owner Name"
-          placeholder="Enter owner name"
-          helperText="3-30 characters"
-        />
-      </FormControl>
+      <FormInput
+        name="email"
+        control={form.control}
+        label="Email"
+        type="email"
+        placeholder="example@email.com"
+      />
 
-      <FormControl fullWidth>
-        <FormInput
-          name="email"
-          control={form.control}
-          label="Email"
-          type="email"
-          placeholder="Enter email address"
-          helperText="Enter a valid email address"
-        />
-      </FormControl>
+      <FormInput
+        name="phone"
+        control={form.control}
+        label="Phone"
+        placeholder="8–11 digits"
+      />
 
-      <FormControl fullWidth>
-        <FormInput
-          name="phone"
-          control={form.control}
-          label="Phone"
-          placeholder="Enter phone number"
-          helperText="8-11 digits only"
-        />
-      </FormControl>
+      <FormInput
+        name="confirmPhone"
+        control={form.control}
+        label="Confirm Phone"
+        placeholder="Re-enter phone number"
+      />
 
-      <FormControl fullWidth>
-        <FormInput
-          name="confirmPhone"
-          control={form.control}
-          label="Confirm Phone"
-          placeholder="Confirm phone number"
-          helperText="Phone numbers must match"
-        />
-      </FormControl>
+      <Box display="flex" flexDirection="column" gap={1.5} mt={1}>
+        {back && (
+          <Button variant="outlined" fullWidth onClick={back}>
+            Back
+          </Button>
+        )}
 
-      {back && (
-        <Button variant="outlined" fullWidth onClick={back}>
-          Back
+        <Button type="submit" variant="contained" fullWidth>
+          Submit
         </Button>
-      )}
-
-      <Button
-        type="submit"
-        variant="contained"
-        fullWidth
-        sx={{ mt: 2 }}
-        disabled={form.formState.isSubmitting}
-      >
-        {form.formState.isSubmitting ? "Submitting..." : "Submit"}
-      </Button>
+      </Box>
     </Box>
   );
 }

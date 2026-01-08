@@ -1,10 +1,11 @@
 import BusinessInfoStep from "./components/BusinessInfoStep";
-import { Grid } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import OwnerContactStep from "./components/OwnerContactStep";
 import LocationStep from "./components/LocationStep";
 import { type RegisterFormDraft, type RegisterStep } from "./types";
 import { useState } from "react";
-import { Stepper, Step, StepLabel } from "@mui/material";
+import { MobileStepProgress } from "../../shared/components/MobileStepProgress";
+import { DesktopStepper } from "../../shared/components/DesktopStepper";
 
 const steps = [BusinessInfoStep, LocationStep, OwnerContactStep] as const;
 const stepLabels = [
@@ -47,28 +48,43 @@ export default function RegisterPage() {
   const CurrentStep = steps[step];
 
   return (
-    <Grid
-      container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      sx={{ minHeight: "100vh" }}
-    >
-      <Stepper activeStep={step} sx={{ width: "100%", maxWidth: 500 }}>
-        {stepLabels.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
+    <Container maxWidth="md">
+      <Box
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: { xs: "flex-start", sm: "center" },
+          py: { xs: 3, sm: 0 },
+          gap: 4,
+        }}
+      >
+        <DesktopStepper step={step} labels={stepLabels} />
 
-      <CurrentStep
-        data={formData}
-        setData={setFormData}
-        next={next}
-        back={back}
-      />
-    </Grid>
+        <MobileStepProgress
+          step={step}
+          totalSteps={stepLabels.length}
+          label={stepLabels[step]}
+        />
+
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Box sx={{ width: "100%", maxWidth: 420 }}>
+            <CurrentStep
+              data={formData}
+              setData={setFormData}
+              next={next}
+              back={back}
+            />
+          </Box>
+        </Box>
+      </Box>
+    </Container>
   );
 }

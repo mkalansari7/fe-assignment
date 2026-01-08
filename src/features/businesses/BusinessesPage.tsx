@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getRegistrations } from "../register/utils/getRegistrations";
 import type { RegisterFormData } from "../register/schema";
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
+import { BusinessCard } from "../../shared/components/BusinessCard";
 
 export default function BusinessesPage() {
   const [businesses, setBusinesses] = useState<RegisterFormData[]>([]);
@@ -12,8 +13,8 @@ export default function BusinessesPage() {
   }, []);
 
   return (
-    <Box sx={{ maxWidth: 800, mx: "auto", p: 3 }}>
-      <Typography variant="h4" gutterBottom>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Typography variant="h4" fontWeight={700} gutterBottom>
         Registered Businesses
       </Typography>
 
@@ -22,22 +23,14 @@ export default function BusinessesPage() {
           No businesses registered yet.
         </Typography>
       ) : (
-        businesses.map((biz, index) => (
-          <Card key={index} sx={{ mb: 2 }}>
-            <CardContent>
-              <Typography variant="h6">{biz.businessName}</Typography>
-
-              <Typography variant="body2" color="text.secondary">
-                {biz.businessType} • {biz.country}
-              </Typography>
-
-              <Typography variant="body2">
-                Owner: {biz.ownerName} ({biz.email})
-              </Typography>
-            </CardContent>
-          </Card>
-        ))
+        <Grid container spacing={3}>
+          {businesses.map((biz, index) => (
+            <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
+              <BusinessCard business={biz} />
+            </Grid>
+          ))}
+        </Grid>
       )}
-    </Box>
+    </Container>
   );
 }
