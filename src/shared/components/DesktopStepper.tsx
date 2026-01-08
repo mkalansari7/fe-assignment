@@ -20,7 +20,7 @@ export function DesktopStepper({ step, labels }: DesktopStepperProps) {
           <StepLabel
             sx={{
               "& .MuiStepLabel-label": {
-                fontWeight: index === step ? 700 : 400,
+                fontWeight: index === step ? 600 : 400,
                 fontSize: "1rem",
               },
             }}

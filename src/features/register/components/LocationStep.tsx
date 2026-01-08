@@ -60,12 +60,6 @@ export default function LocationStep({ data, setData, next, back }: StepProps) {
       />
 
       <Box display="flex" flexDirection="column" gap={1.5} mt={1}>
-        {back && (
-          <Button variant="outlined" fullWidth onClick={back}>
-            Back
-          </Button>
-        )}
-
         <Button
           type="submit"
           variant="contained"
@@ -74,6 +68,12 @@ export default function LocationStep({ data, setData, next, back }: StepProps) {
         >
           Continue
         </Button>
+
+        {back && (
+          <Button variant="outlined" fullWidth onClick={back}>
+            Back
+          </Button>
+        )}
       </Box>
     </Box>
   );

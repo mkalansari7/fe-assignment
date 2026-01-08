@@ -84,15 +84,15 @@ export default function OwnerContactStep({ data, back }: StepProps) {
       />
 
       <Box display="flex" flexDirection="column" gap={1.5} mt={1}>
+        <Button type="submit" variant="contained" fullWidth>
+          Submit
+        </Button>
+
         {back && (
           <Button variant="outlined" fullWidth onClick={back}>
             Back
           </Button>
         )}
-
-        <Button type="submit" variant="contained" fullWidth>
-          Submit
-        </Button>
       </Box>
     </Box>
   );
