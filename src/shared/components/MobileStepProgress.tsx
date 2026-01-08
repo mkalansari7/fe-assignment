@@ -21,7 +21,13 @@ export function MobileStepProgress({
         mb: 3,
       }}
     >
-      <Typography variant="subtitle1" fontWeight={700} gutterBottom>
+      <Typography
+        variant="subtitle1"
+        gutterBottom
+        sx={{
+          fontWeight: (theme) => theme.typography.fontWeightBold,
+        }}
+      >
         {label}
       </Typography>
 
