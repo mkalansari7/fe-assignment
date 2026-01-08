@@ -15,16 +15,15 @@ export function DesktopStepper({ step, labels }: DesktopStepperProps) {
         display: { xs: "none", sm: "flex" },
       }}
     >
-      {labels.map((label, index) => (
+      {labels.map((label) => (
         <Step key={label}>
           <StepLabel
             sx={{
               "& .MuiStepLabel-label": {
-                fontWeight: (theme) =>
-                  index === step
-                    ? theme.typography.fontWeightBold
-                    : theme.typography.fontWeightRegular,
-                fontSize: "1rem",
+                fontWeight: (theme) => theme.typography.fontWeightRegular,
+              },
+              "& .MuiStepLabel-label.Mui-active": {
+                fontWeight: (theme) => theme.typography.fontWeightBold,
               },
             }}
           >
